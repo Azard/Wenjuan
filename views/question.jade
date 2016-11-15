@@ -1,0 +1,111 @@
+extends layout
+
+block content
+  nav.navbar.navbar-default(role="navigation")
+    .container-fluid
+      .navbar-header
+        a.navbar-brand(href='/question') 2016级上海交通大学新生心理调研
+      .collapse.navbar-collapse
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(href='/question')= student
+          li
+            a(href='/api/logout') 注销
+
+
+  .container
+    .well.well-lg.col-md-8.col-md-offset-2
+      .col-md-10.col-md-offset-1
+        if (num >= 64 && num <=69)
+          <h3 style='text-indent: 2em'>某件事情要不要做，该怎样做？同一个人在不同的情景下的做法也是有差异的。假如考场上你有<b>一道5-6分的题目不会做</b>，你无意中发现<b>边上的同学会做那道题</b>，而且<b>那个同学跟你的交情还不错</b>。判断在如下情景下你寻求那个同学“帮助”的可能性，选择最接近的选项：</h3>
+          br
+        else if (num == 149)
+          <h3 style='text-indent: 2em'>下面一些问题描述了我们生活中可能发生的事情或者主观感受，请判断这些描述是否符合你<b>过去一个月</b>内的实际情况，并选择合适的选项。</h3>
+        else if (question.title)
+          h3(style='text-indent: 2em')= question.title
+          br
+        case num
+          when 64
+            <h3>&nbsp&nbsp&nbsp&nbsp64. 你觉得<b>其它的题目都还挺有把握的，考一个还算体面的成绩应该没问题</b>；老师的<b>监考很严</b>。在此情景下你选择寻求那个同学“帮助”的可能性</h3>
+          when 65
+            <h3>&nbsp&nbsp&nbsp&nbsp65. 你觉得<b>成绩不会太好，考及格应该没有问题；老师的监考很严</b>。在此情景下你选择寻求那个同学“帮助”的可能性</h3>
+          when 66
+            <h3>&nbsp&nbsp&nbsp&nbsp66. <b>其它的题目也做得不好，是否能及格在两可之间；老师的监考很严</b>。在此情景下你选择寻求那个同学“帮助”的可能性</h3>
+          when 67
+            <h3>&nbsp&nbsp&nbsp&nbsp67.你觉得<b>其它的题目都还挺有把握的，考一个体面的成绩应该没有问题</b>；老师<b>监考挺松的</b>。在此情景下你选择寻求那个同学“帮助”的可能性</h3>
+          when 68
+            <h3>&nbsp&nbsp&nbsp&nbsp68. 你觉得<b>成绩不会太好，但考及格应该没有问题</b>；老师<b>监考挺松的</b>。在此情景下你选择寻求那个同学“帮助”的可能性</h3>
+          when 69
+            <h3>&nbsp&nbsp&nbsp&nbsp69. <b>其它的题目也做得不好，是否能及格在两可之间</b>；老师<b>监考挺松的</b>。在此情景下你选择寻求那个同学“帮助”的可能性</h3>
+          when 70
+            <h3>&nbsp&nbsp&nbsp&nbsp70. 在<b>身体状况良好，课程比较重要，老师还经常点名</b>时，您去听课的可能性有多大？</h3>
+          when 71
+            <h3>&nbsp&nbsp&nbsp&nbsp71. 在<b>身体状况良好，课程比较重要，老师从不点名</b>时，您去听课的可能性有多大？</h3>
+          when 72
+            <h3>&nbsp&nbsp&nbsp&nbsp72. 在<b>在身体状况良好，课程不太重要，但老师经常点名</b>时，您去听课的可能性有多大？</h3>
+          when 73
+            <h3>&nbsp&nbsp&nbsp&nbsp73. 在<b>身体状况良好，课程不太重要，老师从不点名</b>时，您去听课的可能性有多大？</h3>
+          when 74
+            <h3>&nbsp&nbsp&nbsp&nbsp74. 假如您<b>没睡好，脑袋昏沉</b>，但是<b>课程比较重要，老师还经常点名</b>时，您去听课的可能性有多大？</h3>
+          when 75
+            <h3>&nbsp&nbsp&nbsp&nbsp75. 假如您<b>没睡好，脑袋昏沉</b>，但是<b>课程比较重要，老师从不点名</b>时，您去听课的可能性有多大？</h3>
+          when 76
+            <h3>&nbsp&nbsp&nbsp&nbsp76. 假如您<b>没睡好，脑袋昏沉</b>，<b>课程不太重要，但老师经常点名</b>时，您去听课的可能性有多大？</h3>
+          when 77
+            <h3>&nbsp&nbsp&nbsp&nbsp77. 假如您<b>没睡好，脑袋昏沉</b>，<b>课程不太重要，老师也从不点名</b>时，您去听课的可能性有多大？</h3>
+          default
+            h3(style='text-indent: 2em')= num + '. ' + question.desc
+        hr
+      form#myForm.form-horizontal(role="form" method="POST" action="/api/submit" data-toggle="validator")
+        .form-group
+          .col-md-10.col-md-offset-1
+            if (question.A)
+              .radio(style='font-size: 18px')
+                label
+                  input(type='radio', name='select', value='A', required, style='width: 18px; height: 18px')
+                  = 'A. ' + question.A
+            if (question.B)
+              .radio(style='font-size: 18px')
+                label
+                  input(type='radio', name='select', value='B', required, style='width: 18px; height: 18px')
+                  = 'B. ' + question.B
+            if (question.C)
+              .radio(style='font-size: 18px')
+                label
+                  input(type='radio', name='select', value='C', required, style='width: 18px; height: 18px')
+                  = 'C. ' + question.C
+            if (question.D)
+              .radio(style='font-size: 18px')
+                label
+                  input(type='radio', name='select', value='D', required, style='width: 18px; height: 18px')
+                  = 'D. ' + question.D
+            if (question.E)
+              .radio(style='font-size: 18px')
+                label
+                  input(type='radio', name='select', value='E', required, style='width: 18px; height: 18px')
+                  = 'E. ' + question.E
+            if (question.F)
+              .radio(style='font-size: 18px')
+                label
+                  input(type='radio', name='select', value='F', required, style='width: 18px; height: 18px')
+                  = 'F. ' + question.F
+        br
+        .form-group
+          .col-md-6.col-md-offset-3
+            button.btn.btn-block.btn-primary(type='submit')
+              span.fa.fa-check.fa-lg
+              | 确认
+  .container
+    .progress.progress-striped.active
+      #progressbar.progress-bar(style='width: 0%')
+    center
+      .p= num + '/244'
+
+
+  script.
+    var progress
+    progress = #{num} / 244 * 100;
+    $("#progressbar").attr("style", "width:" + progress + "%");
+
+
+

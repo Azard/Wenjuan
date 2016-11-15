@@ -1,0 +1,46 @@
+extends layout
+
+block content
+  br
+  .container
+    .well.well-lg.col-md-6.col-md-offset-3
+      h3.text-center.font-bold
+        | 2016级上海交通大学新生心理调研
+      hr
+      p(style='text-indent: 2em; font-size: 16px') 同学你好！欢迎参加2016年度新生心理测试。
+      p(style='text-indent: 2em; font-size: 16px') 本测试施测对象为2016年入学本校、中国大陆籍的新生同学（含硕士生和博士生）。考虑到语言和文化背景因素对测验结果的影响，在技术上尚不具备向其他同学提供该项测验的条件，敬请谅解！
+      p(style='text-indent: 2em; font-size: 16px') 请输入学号、身份证号码后8位（即11位到第18位）和个人邮箱，进入测验。学号和身份证号后8位为必填项，且必须准确匹配。个人邮箱为选填项目。在本校的测验全部结束后，我们会以电子邮件的方式向留下邮箱的同学详细解释与本测验相关的问题，不要求详情解释的同学可不填写该信息。
+      p(style='text-indent: 2em; font-size: 16px') 如果你的学号不存在，或者学号与身份证后8位不匹配，请发邮件至 xinliceping@sjtu.edu.cn，告知你所在的学院、个人学号和身份证号码，谢谢。
+
+    .well.well-lg.col-md-6.col-md-offset-3
+      form.form-horizontal(role="form" method="POST" action="/api/login" data-toggle="validator")
+        br
+        if noStudent
+          .alert.alert-dismissible.alert-danger
+            button.close(type='button', data-dismiss='alert') ×
+            p.text-center 该学号不存在
+        if idNotMatch
+          .alert.alert-dismissible.alert-danger
+            button.close(type='button', data-dismiss='alert') ×
+            p.text-center 身份证号不匹配
+        .form-group
+          label.col-md-2.control-label(for='student') 学号
+          .col-md-7
+            input#student.form-control(type='text', name='student', placeholder='Student number', data-required-error="不能为空", required)
+            span.glyphicon.form-control-feedback(aria-hidden='true')
+          .col-md-3.help-block.with-errors(align="left", style="margin-bottom: 0; margin-top: 6px")
+        .form-group
+          label.col-md-2.control-label(for='id') 身份证后8位
+          .col-md-7
+            input#id.form-control(type='text', name='id', placeholder='ID card number last 8 character', data-required-error="不能为空", required)
+            span.glyphicon.form-control-feedback(aria-hidden='true')
+          .col-md-3.help-block.with-errors(align="left", style="margin-bottom: 0; margin-top: 6px")
+        .form-group
+          label.col-md-2.control-label(for='email') 邮箱
+          .col-md-7
+            input#email.form-control(type='text', name='email', placeholder='Email')
+        .form-group
+          .col-md-5.col-md-offset-3
+            button#login.btn.btn-block.btn-primary(type='submit')
+              span.fa.fa-check.fa-lg
+              | 登录

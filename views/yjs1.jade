@@ -1,0 +1,48 @@
+extends layout
+
+block content
+  nav.navbar.navbar-default(role="navigation")
+    .container-fluid
+      .navbar-header
+        a.navbar-brand(href='/question') 2016级上海交通大学新生心理调研
+      .collapse.navbar-collapse
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(href='/question')= student
+          li
+            a(href='/api/logout') 注销
+
+
+  .container
+    .well.well-lg.col-md-8.col-md-offset-2
+      .col-md-10.col-md-offset-1
+        h3(style='text-indent: 2em') 你参加高考时（考大学时，不是考研究生时）的生源地为
+        hr
+      form#myForm.form-horizontal(role="form" method="POST" action="/api/yjs_1" data-toggle="validator")
+        .form-group
+          .col-md-10.col-md-offset-1
+            .radio(style='font-size: 18px')
+              label
+                input(type='radio', name='select', value='A', required, style='width: 18px; height: 18px')
+                = 'A. 大城市'
+            .radio(style='font-size: 18px')
+              label
+                input(type='radio', name='select', value='B', required, style='width: 18px; height: 18px')
+                = 'B. 中小城市'
+            .radio(style='font-size: 18px')
+              label
+                input(type='radio', name='select', value='C', required, style='width: 18px; height: 18px')
+                = 'C. 小城镇'
+            .radio(style='font-size: 18px')
+              label
+                input(type='radio', name='select', value='D', required, style='width: 18px; height: 18px')
+                = 'D. 农村'
+        br
+        .form-group
+          .col-md-6.col-md-offset-3
+            button.btn.btn-block.btn-primary(type='submit')
+              span.fa.fa-check.fa-lg
+              | 确认
+  .container
+    .progress.progress-striped.active
+      #progressbar.progress-bar(style='width: 0%')

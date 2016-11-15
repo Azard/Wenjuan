@@ -1,0 +1,53 @@
+extends layout
+
+block content
+  nav.navbar.navbar-default(role="navigation")
+    .container-fluid
+      .navbar-header
+        a.navbar-brand(href='/question') 上海交通大学2016级新生心理调研
+      .collapse.navbar-collapse
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(href='/question')= student
+          li
+            a(href='/api/logout') 注销
+
+  .container
+    .well.well-lg.col-md-8.col-md-offset-2
+      if role == 'b'
+        p(style='text-indent: 2em') 同学你好！你已完成第一部分测试。下面进行第二部分测试。第二部分测试要求你填写学校代码、本人学号以及密码信息。本科生参加教育部测试的密码，需要从数据库里面读取）
+        p(style='text-indent: 2em') 请用纸笔记下如下信息，避免遗忘。
+        p(style='text-indent: 2em') 本校学校代码为 t10248
+        p(style='text-indent: 2em') 学号为你自己的学号
+        p(style='text-indent: 2em') 你的密码为
+        a.btn.btn-block.btn-primary(href='http://xstest.tt.gzedu.com/evaluation/evaluationLoginStu/index.do') 跳转到下一部分
+      else
+        h2.text-center= student + ' 的心理调研报告'
+        hr
+        p= '同学你好！'
+        p(style='text-indent: 2em')= '谢谢你参加本次测验。依据测验数据，你的个人结果如下：'
+        hr
+        p(style='text-indent: 2em')= comment_A.sport + ';' + comment_A.music_feel + ';' + comment_A.social + ';' + comment_A.music_express + ';' + comment_A.mentality + '。'
+        p(style='text-indent: 2em')= comment_B.freedom + ';' + comment_B.power + ';' + comment_B.duty + ';' + comment_B.fair + ';' + comment_B.legal + '。'
+        p(style='text-indent: 2em')= comment_D.shame + '。'
+        p(style='text-indent: 2em')= comment_E.cut_class + ';' + comment_E.cheat + '。'
+        p(style='text-indent: 2em')= comment_F.no1 + ';' + comment_F.no2 + ';' + comment_F.no3 + ';' + comment_F.no4 + ';' + comment_F.no5 + '。'
+
+        p(style='text-indent: 2em')= comment_jyb.total
+
+        if comment_jyb.need_serve == 'y'
+          p(style='text-indent: 2em') 你可能有一些与个人发展或者身心健康有关的问题尚未处理好，这给你带来了一些困扰。建议你向亲朋好友、现任班主任、学院思政教师或者学校心理咨询中心的老师求助，以便妥善解决相关问题。
+
+        hr
+        <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp友情提示：</p>
+        <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp1、心理测验结果是否准确严格依赖于问卷回答者是否认真、诚实地回答问题，希望我们都能明确这一点。如果你感觉上述结果与你对自己的印象相差较大，请反思一下你是否认真、诚实地回答了问题。此外，人的心理具有复杂性，测验结果也很难做到完全准确，也请你对此保持理解。</p>
+        <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp2、心理测验结果的解释需要专业知识和技能，业外人士的解读往往并不准确，个别时候甚至与准确意涵相去甚远。如果你希望准确解读测验的评语，可以去参加校内心理测验结果解释讲座（具体讲座信息会在<a href='www.xinqing.sjtu.edu.cn' target='_blank'>www.xinqing.sjtu.edu.cn</a>公布，敬请关注），或者通过邮件的方式与专业人士联系（邮箱：xinliceping@sjtu.edu.cn）。</p>
+        <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp3、人的心理既具有相对稳定性，又无时不在持续变动之中。过去十几年甚至几十年的人生历程造就了你目前的身心状况，你目前的想法和做法也正在塑造你的未来。悦纳自我，抓住当下，积极行动起来进行自我完善是你的最佳选择！</p>
+        <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp4、如果你希望保留自己的测验结果，你可用手机拍照本页面内容，或者通过复制粘贴的方式把本测验结果保存在你个人的电脑文档中。</p>
+        <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp5、需要心理咨询的同学请访问<a href='www.xinqing.sjtu.edu.cn' target='_blank'>www.xinqing.sjtu.edu.cn</a>,按照页面提示操作；或者进入<a href='www.xinqing.sjtu.edu.cn/work/admin' target='_blank'>www.xinqing.sjtu.edu.cn/work/admin</a>进行微信预约。</p>
+        <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp祝学业进步、心情愉快！</p>
+        br
+        p(align="right") 上海交通大学心理咨询中心
+        p(align="right") 2016年10月
+
+
